@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Auth\ReqVaccineController;
+use App\Http\Controllers\VaccineController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\OpenHourController;
@@ -9,7 +12,6 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ReqVaccineController;
 
 
 Route::get('/',function(){
@@ -36,8 +38,36 @@ Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.
 Route::post('/posts/{post}/likes', [PostLikeController::class, 'store'])->name('posts.likes');
 Route::delete('/posts/{post}/likes', [PostLikeController::class, 'destroy'])->name('posts.likes');
 
-Route::get('/requestvaccine', [ReqVaccineController::class, 'index'])->name('requestVaccine');
-Route::post('/requestvaccine', [ReqVaccineController::class, 'store']);
+// Route::get('dropdown', [DropdownController::class, 'index']);
+
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/requestvaccine', [ReqVaccineController::class, 'index'])->name('requestvaccine.index');
+    Route::post('/requestvaccine', [ReqVaccineController::class, 'store'])->name('requestvaccine.store');
+    Route::post('api/fetch-districts', [ReqVaccineController::class, 'fetchDistricts']);
+    Route::post('api/fetch-hospitals', [ReqVaccineController::class, 'fetchHospitals']);
+});
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/vaccines/all', [VaccineController::class, 'allVaccines'])->name('vaccines.all');
+    Route::get('/vaccines/{vaccine}', [VaccineController::class, 'show'])->name('vaccines.show');
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Display the appointment request form
+    Route::get('/appointment/request', [AppointmentController::class, 'showRequestForm'])->name('appointment.request');
+
+    // Handle the appointment request form submission
+    Route::post('/appointment/request', [AppointmentController::class, 'store'])->name('appointment.store');
+
+    Route::get('/appointment/success', [AppointmentController::class, 'success'])->name('appointment.success');
+
+    Route::post('api/fetch-districts', [ReqVaccineController::class, 'fetchDistricts']);
+    Route::get('api/vaccine/{vaccine}/fetch-hospitals/{district}', [AppointmentController::class, 'getHospitals']);
+});
+
+
+
 
 Route::get('/open_hours', [OpenHourController::class, 'index'])->name('open_hours');
 

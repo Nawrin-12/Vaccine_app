@@ -11,27 +11,19 @@ class DropdownController extends Controller
 {
     public function index()
     {
-    //     return view('auth.requestVaccine');
-    $data['divisions'] = Divisions::get(["name", "id"]);
-    return view('dropdown', $data);
+        $data['divisions'] = Divisions::get(["name", "id"]);
+        return view('dropdown', $data);
     }
 
-    public function fetchDistrict(Request $request)
-
+    public function fetchDistricts(Request $request)
     {
         $data['districts'] = Districts::where("division_id", $request->division_id)->get(["name", "id"]);
         return response()->json($data);
     }
 
-    public function fetchHospital(Request $request)
-
+    public function fetchHospitals(Request $request)
     {
-        $data['hospital'] = City::where("district_id", $request->district_id)->get(["name", "id"]);
-
+        $data['hospitals'] = Hospital::where("district_id", $request->district_id)->get(["name", "id"]);
         return response()->json($data);
-
     }
-
-
-
 }

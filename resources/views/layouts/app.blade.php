@@ -34,7 +34,7 @@
             </li>
 
             <li>
-                <a href ="{{ route('requestVaccine') }}" class="p-3">Request Vaccine</a>
+                <a href ="{{ route('requestvaccine.index') }}" class="p-3">Request Vaccine</a>
             </li>
             
             @endauth

@@ -17,4 +17,16 @@ class Districts extends Model
         'lon',
         'url',
     ];
+
+    public function division()
+    {
+        return $this->belongsTo(Divisions::class);
+    }
+
+    public function hospitals()
+    {
+        return $this->hasMany(Hospital::class);
+    }
+
+
 }
