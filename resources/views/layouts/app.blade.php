@@ -7,7 +7,12 @@
     @vite('resources/css/app.css')
     <style>
     body {
-      font-family: Arial, sans-serif;
+        font-family: Arial, sans-serif;
+
+        background-image: url('{{ asset("images/vaccine.jpeg") }}'); /* Replace with the actual path to your image */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
     }
 
     .container {
@@ -43,15 +48,19 @@
   </style>
 </head>
 <body class="bg-gray-200">
-<!-- <img src="{{ asset('images\vaccine.jpeg') }}" alt=""> -->
     <nav class="p-6 bg-white flex justify-between mb-6">
         <ul class="flex items-center">
-            <li>
-                <a href="{{ route('home') }}" class="p-3">Home</a>
-            </li>
+            
+            <a href="{{ route('home') }}">
+                <img src="{{ asset('images\LIFEY_logo.png') }}" alt="LOGO" style="height: 40px; width: 40px;" />
+            </a>
+
+            @auth
             <li>
                 <a href ="{{ route('dashboard') }}" class="p-3">Dashboard</a>
             </li>
+            @endauth
+
             <li>
                 <a href ="{{ route('posts') }}" class="p-3">Query</a>
             </li>        
