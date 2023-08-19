@@ -16,4 +16,21 @@ class Hospital extends Model
         'lon',
         'url',
     ];
+    
+    public function district()
+    {
+        return $this->belongsTo(Districts::class);
+    }
+
+    public function vaccines()
+    {
+        return $this->belongsToMany(Vaccine::class, 'vaccine_hospital')->withTimestamps();
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+
 }

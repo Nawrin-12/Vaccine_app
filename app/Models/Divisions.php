@@ -14,4 +14,10 @@ class Divisions extends Model
         'bn_name',
         'url',
     ];
+
+    public function districts()
+    {
+        return $this->hasMany(Districts::class);
+    }
+
 }
