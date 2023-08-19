@@ -70,6 +70,44 @@
             @enderror
         </div>
 
+         <div class="mb-4">
+            <label for="division" class="sr-only">division</label>
+            <input type="text" name="division" id="division" placeholder ="Select your division"
+            class="bg-gray-100 border-2 w-full p-4 rounded-lg  @error('division')
+            border-red-500 @enderror" value="{{ old('division') }}">
+
+            @error('division')
+            <div class="text-red-500 mt-2 text-sm">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <!-- <div class="mb-4">
+            <label for="district" class="sr-only">district</label>
+            <input type="text" name="district" id="district" placeholder ="Select your district"
+            class="bg-gray-100 border-2 w-full p-4 rounded-lg  @error('district')
+            border-red-500 @enderror" value="{{ old('district') }}">
+
+            @error('district')
+            <div class="text-red-500 mt-2 text-sm">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>
+
+        <div class="mb-4">
+            <label for="hospital" class="sr-only">hospital</label>
+            <input type="text" name="hospital" id="hospital" placeholder ="Select a hospital"
+            class="bg-gray-100 border-2 w-full p-4 rounded-lg  @error('hospital')
+            border-red-500 @enderror" value="{{ old('district') }}">
+
+            @error('hospital')
+            <div class="text-red-500 mt-2 text-sm">
+                {{ $message }}
+            </div>
+            @enderror
+        </div>  -->
 
         <div class="mb-4">
             <label for="medical_records" class="sr-only">medical_records</label>
@@ -89,4 +127,6 @@
        </form>
     </div>
 </div>
+
+
 @endsection
